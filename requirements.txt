@@ -1,0 +1,8 @@
+yagmail
+pandas
+selenium
+numpy
+matplotlib
+beautifulsoup4
+bokeh
+pandas-bokeh

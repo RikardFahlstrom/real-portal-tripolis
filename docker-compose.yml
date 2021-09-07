@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+
+  chrome_browser:
+    image: "selenium/standalone-chrome:latest"
+    hostname: chrome
+    ports:
+      - "4443:4444"
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/bin/check-grid.sh --host 0.0.0.0 --port 4444"]
+      interval: 15s
+      timeout: 30s
+      retries: 5
+
+  scraper:
+    build: .
+    depends_on:
+      - chrome_browser
+    entrypoint: ["./wait-for.sh", "chrome_browser:4443", "--", "python3", "program.py"]
+    command: ["python3", "program.py"]
