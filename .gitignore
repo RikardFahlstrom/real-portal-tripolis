@@ -131,3 +131,5 @@ dmypy.json
 # Project specific
 config.ini
 .idea/
+tripolis_sales.html
+tripolis_sales.xlsx
