@@ -1,8 +1,7 @@
 FROM python:3.8-slim-buster
-WORKDIR /app
+RUN apt-get update && apt-get -y dist-upgrade && apt install -y netcat
+WORKDIR /scraper_code
 COPY requirements.txt requirements.txt
-RUN apt-get update && apt-get -y dist-upgrade
 RUN pip3 install --upgrade pip && pip3 install -r requirements.txt
-RUN apt install -y netcat # Required by wait-for script
 COPY . .
 CMD ["python3", "program.py"]

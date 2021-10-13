@@ -6,3 +6,5 @@ matplotlib
 beautifulsoup4
 bokeh
 pandas-bokeh
+requests
+openpyxl
