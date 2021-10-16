@@ -1,6 +1,6 @@
 ![](static/tripolis.png)
 
---- 
+---
 
 # Real portal Tripolis
 
@@ -8,9 +8,9 @@
 ![](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)
 
-Real portal Brf Tripolis is a scraping service that collects sales information about apartments for Brf Tripolis.  
-It collects information about **all apartments sold** and **all listed apartments** and shares this information via email, where the raw data 
-is attached as Excel files and a Bokeh plot summarizing average prices per year. 
+Real portal Brf Tripolis is a scraping service that collects sales information about apartments for Brf Tripolis.
+It collects information about **all apartments sold** and **all listed apartments** and shares this information via email, where the raw data
+is attached as Excel files and a Bokeh plot summarizing average prices per year.
 
 ## Usage
 

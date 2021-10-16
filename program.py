@@ -11,7 +11,8 @@ def main():
     send_mail(
         configs["mail"]["to_address"],
         configs["mail"]["from_address"],
-        configs["mail"]["from_address_pw"])
+        configs["mail"]["from_address_pw"],
+    )
 
 
 if __name__ == "__main__":
