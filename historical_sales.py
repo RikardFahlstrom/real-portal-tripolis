@@ -21,7 +21,8 @@ def main_historical_sales(runs_local=False):
     logged_in_browser = login_to_page(browser, configs)
     num_pages = get_num_pages_to_query(logged_in_browser, configs)
     raw_data = download_data(logged_in_browser, configs, num_pages)
-    transformed_data = transform_data(raw_data)
+    dropped_columns = remove_unneeded_rows(raw_data)
+    transformed_data = transform_data(dropped_columns)
 
     structured_data, df_graph = create_dataframes_for_table_and_linegraph(
         transformed_data
@@ -80,7 +81,7 @@ def download_data(
 
     all_dfs = []
 
-    for page in range(2, last_page_num + 1):
+    for page in range(1, last_page_num + 1):
         browser.get(configs["abj_portal"]["scrape_url"] + str(page))
         df = pd.read_html(
             browser.find_element_by_xpath(
@@ -97,8 +98,24 @@ def download_data(
     return pd.concat(all_dfs, ignore_index=True)
 
 
+def remove_unneeded_rows(df: pd.DataFrame):
+    df = df.iloc[:, :-1]
+    df["Objekt"] = df["Objekt"].astype(str)
+    df.drop(
+        df[
+            (df.Objekt.str.startswith("Namn"))
+            | (df.Objekt.str.startswith("Information"))
+            | (~df.Objekt.str.contains("0|1|2|3|4|5|6|7|8|9"))
+        ].index,
+        inplace=True,
+    )
+
+    return df
+
+
 def transform_data(raw_data: pd.DataFrame) -> pd.DataFrame:
 
+    raw_data["Area"] = raw_data["Area"].astype(float)
     raw_data["Area"] = raw_data["Area"] / 100
     raw_data["Pris"] = raw_data["Pris"].str.replace("-", "0")
     raw_data["Pris"] = raw_data["Pris"].str.replace(" ", "")

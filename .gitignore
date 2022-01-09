@@ -134,3 +134,4 @@ config.ini
 output_files/tripolis_sales.html
 output_files/tripolis_for_sale.xlsx
 output_files/tripolis_historical_sales.xlsx
+.DS_Store
